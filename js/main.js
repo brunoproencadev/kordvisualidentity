@@ -101,3 +101,49 @@
             setTimeout(() => {
                 next.classList.add('active');
                 next.scrollTop = 0;
+
+                gsap.fromTo(next.querySelectorAll('.anim-hero, .anim-el'),
+                    { y: isForward ? 60 : -60, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1, stagger: 0.08, ease: "expo.out", onComplete: () => {
+                            isAnimating = false;
+                        }
+                    }
+                );
+
+                dots[currentSlide].classList.remove('active');
+                currentSlide = targetIndex;
+                dots[currentSlide].classList.add('active');
+
+                btnPrev.disabled = currentSlide === 0;
+                btnNext.disabled = currentSlide === slides.length - 1;
+
+            }, 400);
+        }
+
+        function changeSlide(direction) { goToSlide(currentSlide + direction); }
+
+        btnPrev.disabled = true;
+
+        // 4. SUPORTE A TECLADO & MOUSEWHEEL
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        window.addEventListener('wheel', (e) => {
+            const currentSlideEl = slides[currentSlide];
+            const isScrollable = currentSlideEl.scrollHeight > currentSlideEl.clientHeight + 2;
+
+            if (isScrollable) {
+                const atTop = currentSlideEl.scrollTop === 0;
+                const atBottom = Math.abs(currentSlideEl.scrollHeight - currentSlideEl.scrollTop - currentSlideEl.clientHeight) < 2;
+                if (e.deltaY > 0 && !atBottom) return;
+                if (e.deltaY < 0 && !atTop) return;
+            }
+
+            if (Math.abs(e.deltaY) > 40 && !isAnimating) {
+                if (e.deltaY > 0) changeSlide(1);
+                else changeSlide(-1);
+            }
+        });
