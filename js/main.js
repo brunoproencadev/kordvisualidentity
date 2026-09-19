@@ -42,3 +42,62 @@
                         y: (distY * -0.05) * intensity,
                         scale: 1 + (0.04 * intensity),
                         skewX: (distX * 0.015) * intensity,
+                        textShadow: `0px ${8 * intensity}px ${15 * intensity}px rgba(30, 96, 242, ${0.3 * intensity})`,
+                        duration: 0.3,
+                        ease: "power2.out",
+                        overwrite: "auto"
+                    });
+                } else {
+                    if (el._gsap && (el._gsap.x !== 0 || el._gsap.scale !== 1)) {
+                        gsap.to(el, {
+                            x: 0, y: 0, scale: 1, skewX: 0, textShadow: "none",
+                            duration: 0.6, ease: "power2.out", overwrite: "auto"
+                        });
+                    }
+                }
+            });
+
+            requestAnimationFrame(renderOrb);
+        }
+        renderOrb();
+
+        // 3. SLIDER LOGIC
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        let currentSlide = 0;
+        let isAnimating = false;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        });
+        const dots = document.querySelectorAll('.dot');
+
+        gsap.from(".anim-hero", { y: 60, opacity: 0, duration: 1.2, stagger: 0.15, ease: "expo.out", delay: 0.2 });
+
+        window.goToSlide = function (targetIndex) {
+            if (isAnimating || currentSlide === targetIndex) return;
+            if (targetIndex < 0 || targetIndex >= slides.length) return;
+
+            isAnimating = true;
+            const current = slides[currentSlide];
+            const next = slides[targetIndex];
+            const isForward = targetIndex > currentSlide;
+
+            gsap.to(current.querySelectorAll('.distort-target'), { x: 0, y: 0, scale: 1, skewX: 0, textShadow: "none", duration: 0.2 });
+
+            gsap.to(current.querySelectorAll('.anim-hero, .anim-el'), {
+                y: isForward ? -40 : 40, opacity: 0, duration: 0.45, stagger: 0.03, ease: "power2.in",
+                onComplete: () => {
+                    current.classList.remove('active');
+                    gsap.set(current.querySelectorAll('.anim-hero, .anim-el'), { clearProps: "all" });
+                }
+            });
+
+            setTimeout(() => {
+                next.classList.add('active');
+                next.scrollTop = 0;
