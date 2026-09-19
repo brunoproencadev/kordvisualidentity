@@ -1,0 +1,41 @@
+/* Importando fallback de fontes e a Anthropic Sans */
+        @font-face {
+            font-family: 'Anthropic Sans';
+            src: local('Anthropic Sans'), local('AnthropicSans-Regular');
+        }
+
+        @font-face {
+            font-family: 'Anthropic Sans Display';
+            src: local('Anthropic Sans Display'), local('AnthropicSansDisplay-Bold');
+            font-weight: 700;
+        }
+
+        :root {
+            --bg-dark: #05050A;
+            --midnight-blue: #191970;
+            --cobalt-glow: #1E60F2;
+            --text-primary: #FFFFFF;
+            --text-muted: #8A93AA;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Anthropic Sans', -apple-system, sans-serif;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+            /* Desativa a seleção de texto para dar sensação de App nativo */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
