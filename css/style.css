@@ -199,7 +199,7 @@
         /* Base Typography Elements */
         h1 {
             font-family: 'Anthropic Sans Display', sans-serif;
-            font-size: clamp(80px, 10vw, 150px);
+            font-size: clamp(48px, 10vw, 150px);
             font-weight: 700;
             letter-spacing: -0.05em;
             line-height: 1;
@@ -208,7 +208,7 @@
         }
 
         h2 {
-            font-size: clamp(32px, 4vw, 54px);
+            font-size: clamp(28px, 6vw, 54px);
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 40px;
@@ -412,4 +412,56 @@
             background: var(--cobalt-glow);
             width: 24px;
             border-radius: 10px;
+        }
+
+        /* ================= MEDIA QUERIES (MOBILE RESPONSIVENESS) ================= */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 20px;
+            }
+
+            .nav-badge {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+
+            .slide {
+                padding: 100px 20px 80px 20px;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .logo-wrapper-horizontal {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .glass-panel {
+                padding: 24px;
+            }
+
+            .table-glass {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .table-glass th,
+            .table-glass td {
+                padding: 10px;
+                font-size: 12px;
+                white-space: nowrap;
+            }
+            
+            .cursor-lens {
+                display: none;
+            }
+
+            .slide-controls {
+                bottom: 20px;
+                padding: 8px 20px;
+                gap: 16px;
+            }
         }
