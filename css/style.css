@@ -205,3 +205,86 @@
             line-height: 1;
             margin-bottom: 10px;
             display: inline-block;
+        }
+
+        h2 {
+            font-size: clamp(32px, 4vw, 54px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            display: inline-block;
+        }
+
+        .overline {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cobalt-glow);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* Classes alvos da distorção de texto */
+        .distort-target {
+            will-change: transform, text-shadow;
+            transform-style: preserve-3d;
+        }
+
+        /* ================= UI CARDS & GRIDS ================= */
+        .glass-panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 24px;
+            padding: 40px;
+            transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .value-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .value-item {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .value-number {
